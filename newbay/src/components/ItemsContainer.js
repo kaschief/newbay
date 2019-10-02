@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
-// import { StyleSheet, css } from 'aphrodite/no-important';
-// import { compose, withProps, lifecycle } from 'recompose';
+import { StyleSheet, css as aphrocss } from 'aphrodite/no-important';
 import axios from 'axios';
 import Item from './Item';
+import { ClimbingBoxLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 
-// const styles = StyleSheet.create({
-//   buttonContainer: {
-//     display: 'flex',
-//     justifyContent: 'center'
-//   },
-//   button: {
-//     border: '1px solid lightGrey',
-//     borderRadius: '5px'
-//   },
-//   link: {
-//     color: 'black',
-//     textDecoration: 'none'
-//   }
-// });
+const styles = StyleSheet.create({
+  container: {
+    marginTop: '40px'
+  }
+});
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 export default class ItemsContainerUI extends Component {
   constructor(props) {
@@ -39,11 +37,6 @@ export default class ItemsContainerUI extends Component {
               response.data.findItemsByKeywordsResponse[0].searchResult[0].item
           });
           console.log('STATE', this.state.items);
-
-          console.log(
-            'SHIPPING INFO',
-            this.state.items[0].shippingInfo[0].shipToLocations[0]
-          );
         },
         error => {
           console.log('ERROR', error);
@@ -53,26 +46,39 @@ export default class ItemsContainerUI extends Component {
 
   render() {
     return this.state.items.length === 0 ? (
-      <div>Loading</div>
+      <div className={aphrocss(styles.container)}>
+        <ClimbingBoxLoader
+          css={override}
+          sizeUnit={'px'}
+          size={23}
+          color={'#F8E507'}
+          loading={true}
+        />
+      </div>
     ) : (
-      this.state.items.map((a, i) => {
-        return (
-          <Item
-            key={i}
-            link={a.viewItemURL[0]}
-            title={a.title}
-            price={Number(
-              Math.round(a.sellingStatus[0].currentPrice[0].__value__ * 100) /
-                100
-            ).toFixed(2)}
-            ships={a.location[0].slice(0, -7)}
-            destination={a.shippingInfo[0].shipToLocations[0]}
-            shippingCost={Number(
-              a.shippingInfo[0].shippingServiceCost[0].__value__
-            ).toFixed(2)}
-          />
-        );
-      })
+      <div className={aphrocss(styles.container)}>
+        {this.state.items.map((a, i) => {
+          return (
+            <div>
+              <Item
+                key={i}
+                link={a.viewItemURL[0]}
+                title={a.title}
+                price={Number(
+                  Math.round(
+                    a.sellingStatus[0].currentPrice[0].__value__ * 100
+                  ) / 100
+                ).toFixed(2)}
+                ships={a.location[0].slice(0, -7)}
+                destination={a.shippingInfo[0].shipToLocations[0]}
+                shippingCost={Number(
+                  a.shippingInfo[0].shippingServiceCost[0].__value__
+                ).toFixed(2)}
+              />
+            </div>
+          );
+        })}
+      </div>
     );
   }
 }

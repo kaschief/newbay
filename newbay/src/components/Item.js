@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     background: 'rgb(255, 255, 255)',
+    minWidth: '100px',
     width: '700px',
     height: '80px',
     borderRadius: '8px',
@@ -19,7 +20,6 @@ const styles = StyleSheet.create({
     height: '80px',
     minWidth: '80px',
     maxWidth: '80px',
-    // paddingTop: '30px',
     backgroundColor: 'blue'
   },
   contentContainer: {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
     display: 'flex',
     flexDirection: 'column',
-    overflow: 'auto',
+    overflow: 'hidden',
     padding: '16px'
   },
   contents: {
