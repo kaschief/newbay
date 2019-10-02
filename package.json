@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "aphrodite": "^2.4.0",
+    "recompose": "^0.30.0"
+  }
+}
