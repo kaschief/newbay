@@ -42,10 +42,8 @@ const ItemsContainerUI = ({ items }) => {
                 100
             ).toFixed(2)}
             ships={a.location[0].slice(0, -7)}
+            expedited={a.shippingInfo[0].expeditedShipping[0]}
             destination={a.shippingInfo[0].shipToLocations[0]}
-            shippingCost={Number(
-              a.shippingInfo[0].shippingServiceCost[0].__value__
-            ).toFixed(2)}
           />
         );
       })}

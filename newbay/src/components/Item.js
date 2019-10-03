@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const ItemUI = ({ title, price, link, destination, shippingCost }) => {
+const ItemUI = ({ title, price, link, destination, expedited }) => {
   return (
     <div className={css(styles.container)}>
       <a className={css(styles.link)} href={link}>
@@ -73,13 +73,13 @@ const ItemUI = ({ title, price, link, destination, shippingCost }) => {
           <h4 className={css(styles.contents, styles.header)}>{title}</h4>
         </a>
         <div className={css(styles.footer, styles.text)}>
-          {shippingCost > 0 ? (
+          {expedited === 'true' ? (
             <p className={css(styles.contents, styles.text, styles.shipping)}>
-              Ships {destination} for ${shippingCost}
+              Expedited shipping {destination}
             </p>
           ) : (
             <p className={css(styles.contents, styles.text, styles.shipping)}>
-              Free shipping {destination}
+              Ships {destination}
             </p>
           )}
           <p className={css(styles.contents, styles.header)}>{`$${price}`}</p>
