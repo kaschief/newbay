@@ -1,7 +1,7 @@
 import React from 'react';
-import { Input, Container, Row, Col } from 'reactstrap';
-import SearchButton from './SearchButton';
+import { Input } from 'reactstrap';
 import { StyleSheet, css } from 'aphrodite/no-important';
+import Filter from './Filter';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     borderRadius: '8px',
     boxShadow:
       'rgba(0, 0, 0, 0.05) 0px 0px 0px, rgba(0, 0, 0, 0.13) 0px 0px 0px;',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    backgroundColor: `fuchsia`
   },
   button: {
     height: '40px',
@@ -28,20 +29,31 @@ const styles = StyleSheet.create({
   }
 });
 
-const Search = ({ search, change, pressed, clicked }) => {
+const SearchUI = ({
+  searchTerm,
+  change,
+  pressed,
+  clicked,
+  numberInput,
+  minPrice,
+  maxPrice
+}) => {
   return (
     <div className={css(styles.container)}>
       <Input
         type="text"
-        name="search"
-        placeholder="ebay Search"
-        value={search}
+        name="searchTerm"
+        placeholder="eBay Search"
+        value={searchTerm}
         onChange={change}
         onKeyUp={pressed}
       />
-      <button className={css(styles.button)}>Search</button>
+      <Filter minPrice={minPrice} maxPrice={maxPrice} change={numberInput} />
+      <button className={css(styles.button)} onClick={clicked}>
+        Search
+      </button>
     </div>
   );
 };
 
-export default Search;
+export default SearchUI;
